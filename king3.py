@@ -85,4 +85,7 @@ long = ((l, mas[0][10] + bigv * grad), (l, mas[0][10] + smalv * grad))
 print(l, ', ', ll)
 print(latit)
 print(long)
+points = ((latit[0][0], long[0][1]),(latit[0][0], long[1][1]),(latit[1][0], long[0][1]),(latit[1][0], long[1][1]))
+for i in points:
+    print(i)
 ##################################GET new latitude and longtitude##################################

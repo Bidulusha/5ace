@@ -16,8 +16,8 @@ def looting(img, filecsv):
 
 
     ##################################GET FotoTime##################################
-
-    fototime = int(img[17:19])
+    i = os.path.basename(img)
+    c = int(i[17:19])
 
     ##################################GET FotoTime##################################
 

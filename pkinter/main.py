@@ -3,6 +3,7 @@ from tkinter import filedialog, messagebox
 from PIL import Image, ImageTk  # Импортируем необходимые модули из Pillow
 import os
 import re
+from camera_coordinates import looting
 
 class MyApp:
     def __init__(self, root):
@@ -32,17 +33,18 @@ class MyApp:
         self.coordinates_frame.pack(pady=10)
 
         for i in range(4):
+            print(self.data)
             tk.Label(self.coordinates_frame, text=f'Долгота {i}:').grid(row=i, column=0)
             self.longitude1_entry = tk.Entry(self.coordinates_frame)
             self.longitude1_entry.grid(row=i, column=1)
+            self.longitude1_entry.insert(0,'1231')
             self.longitude1_entry.config(state='disabled')
 
             tk.Label(self.coordinates_frame, text=f'Широта {i}:').grid(row=i, column=2)
             self.latitude1_entry = tk.Entry(self.coordinates_frame)
             self.latitude1_entry.grid(row=i, column=3)
-            self.longitude1_entry.config(state='disabled')
-    def load_data(self):
-        return
+            self.latitude1_entry.config(state='disabled')
+
 
     def select_image(self):
         # Открываем диалог для выбора файла
@@ -55,8 +57,9 @@ class MyApp:
             print(file_path)
             #file_path = file_path[:-len(file_name)-4]
             dirictory_path = os.path.dirname(file_path)
-            new_path = os.path.join(os.path.dirname(file_path), 'logs', 'beacon_human')
+            new_path = os.path.join(os.path.dirname(file_path), 'logs', 'beacon_human.csv')
             print(new_path)
+        self.data = looting(file_path,new_path)
 
 
 

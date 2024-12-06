@@ -24,3 +24,10 @@ def to_time(mas):
             t %= j
         datemas.append(date)
     return datemas
+
+def rotate_axis_z(q, points):
+    newpoints = []
+    for i in points:
+        x,y = i
+        newpoints.append((x*math.cos(q) + y * math.sin(q), -x*math.sin(q) + y*math.cos(q)))
+    return newpoints

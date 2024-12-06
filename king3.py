@@ -86,6 +86,10 @@ print(l, ', ', ll)
 print(latit)
 print(long)
 points = ((latit[0][0], long[0][1]),(latit[0][0], long[1][1]),(latit[1][0], long[0][1]),(latit[1][0], long[1][1]))
+newpoints = newmath.rotate_axis_z((PI * euler_index[2])/180, points)
 for i in points:
+    print(i)
+print()
+for i in newpoints:
     print(i)
 ##################################GET new latitude and longtitude##################################

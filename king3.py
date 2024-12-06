@@ -4,7 +4,7 @@ import math
 from math import pi as PI
 import os
 import csv
-
+import newhtml
 
 img = 'pic2/2024-10-24_04-42-28_SXC3-227_1.jpg'
 
@@ -60,12 +60,8 @@ tt = sorted(tt)
 
 ##################################Loot indexis that we need##################################
 
-for i in euler_mas:
-    print(i)
-
 a, b = tt[len(tt) % 2 ], tt[len(tt) % 2 + 1]
 euler_index = list((euler_mas[a][i] + euler_mas[b][i]) / 2 for i in range(3))
-
 ##################################Loot indexis that we need##################################
 
 ##################################GET new latitude and longtitude##################################
@@ -86,18 +82,16 @@ ll = (mas[a][10] + mas[b][10]) / 2
 latit = ((mas[0][9] + bigg * grad,  ll), (mas[0][9] + smalg * grad, ll))
 long = ((l, mas[0][10] + bigv * grad), (l, mas[0][10] + smalv * grad))
 
-print(l, ', ', ll)
-print(latit)
-print(long)
 points = ((latit[0][0], long[0][1]),(latit[0][0], long[1][1]),(latit[1][0], long[0][1]),(latit[1][0], long[1][1]))
-newpoints = newmath.rotate_axis_z((PI * euler_index[2])/180, points)
-for i in points:
+newpoints = newmath.rotate_axis_z(PI * (euler_index[2])/180, points)
+'''for i in points:
     print(i)
 print()
 for i in newpoints:
-    print(i)
+    print(i)'''
 ##################################GET new latitude and longtitude##################################
 
 ##################################GEO##################################
 
-tgjs.create_geojson_with_image(img, newpoints)
+tgjs.create_geojson_with_image(img, points)
+newhtml.create_html_file()

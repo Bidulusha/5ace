@@ -21,7 +21,7 @@ f = -1
 for i in dirs:
     c = i.find('.jpg')
     if c != -1:
-        fototime = i[17:19]
+        fototime = int(i[17:19])
         break
 ##################################GET FotoTime##################################
 
@@ -40,31 +40,49 @@ with open('pic2/logs/beacon_human.csv', newline='') as csvfile:
 
 h = newmath.find_height(mas)
 euler_mas = quat_to_eul_mas(mas)
-for i in euler_mas:
-    print(i)
 ##################################GET MAS##################################
 
 ##################################GET time from FotoTime##################################
 datetime = newmath.to_time(mas)
-tt = []
-for i in range(1,len(datetime)):
-    if datetime[i] > fototime and datetime[i-1] < fototime or datetime[i] == fototime or datetime[i + 1] > fototime and datetime[i] < fototime:
-        tt.append(datetime[i])
+tt = set()
+for i in range(1,len(datetime) - 1):
+    if datetime[i][-1] == c or datetime[i][-1] > c and datetime[i - 1][-1] < c:
+        tt.add(i - 1)
+        tt.add(i)
+        tt.add(i + 1)
 
-print(tt)
+tt = sorted(tt)
 ##################################GET time from FotoTime##################################
 
-##################################GET new latitude and longtitude##################################
-for i in euler_mas:
-    bigv = math.tan(PI * (i[0] + vert / 2) / 180) * h / 1000
-    smalv = math.tan(PI * (i[0] - vert / 2) / 180) * h / 1000
+##################################Loot indexis that we need##################################
 
-    bigg = math.tan(PI * (i[1] + vert / 2) / 180) * h / 1000
-    smalg = math.tan(PI * (i[1] - vert / 2) / 180) * h / 1000
+for i in euler_mas:
+    print(i)
+
+a, b = tt[len(tt) % 2 ], tt[len(tt) % 2 + 1]
+euler_index = list((euler_mas[a][i] + euler_mas[b][i]) / 2 for i in range(3))
+
+##################################Loot indexis that we need##################################
+
+##################################GET new latitude and longtitude##################################
+
+
+bigv = math.tan(PI * (euler_index[0] + vert / 2) / 180) * h / 1000
+smalv = math.tan(PI * (euler_index[0] - vert / 2) / 180) * h / 1000
+
+bigg = math.tan(PI * (euler_index[1] + gor / 2) / 180) * h / 1000
+smalg = math.tan(PI * (euler_index[1] - gor / 2) / 180) * h / 1000
 
 
 grad = 360 / 40000
 
-l = [mas[0][9] + bigv * grad ,mas[0][9] + smalv * grad]
-f = [mas[0][10] + bigg * grad, mas[0][10] + smalg * grad]
+l = (mas[a][9] + mas[b][9]) / 2
+ll = (mas[a][10] + mas[b][10]) / 2
+
+latit = ((mas[0][9] + bigg * grad,  ll), (mas[0][9] + smalg * grad, ll))
+long = ((l, mas[0][10] + bigv * grad), (l, mas[0][10] + smalv * grad))
+
+print(l, ', ', ll)
+print(latit)
+print(long)
 ##################################GET new latitude and longtitude##################################

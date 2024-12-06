@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="6">
+        <GroundOverlay id="7">
+            <name>Attached Image</name>
+            <Icon id="8">
+                <href>pic2/2024-10-24_04-42-28_SXC3-227_1.jpg</href>
+            </Icon>
+            <LatLonBox>
+                <north>28.681731582377733</north>
+                <south>24.158869172942303</south>
+                <east>73.28939190762496</east>
+                <west>67.35743666479698</west>
+            </LatLonBox>
+        </GroundOverlay>
+    </Document>
+</kml>

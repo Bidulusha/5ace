@@ -1,8 +1,10 @@
 import newmath
+import to_geo as tg
 import math
 from math import pi as PI
 import os
 import csv
+
 
 vert = 62.2
 gor = 48.8
@@ -93,3 +95,7 @@ print()
 for i in newpoints:
     print(i)
 ##################################GET new latitude and longtitude##################################
+
+##################################GEO##################################
+
+tg.create_kml_with_image('pic2/2024-10-24_04-42-28_SXC3-227_1.jpg', newpoints,  "output.kml")

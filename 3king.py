@@ -18,13 +18,13 @@ with open('logs/beacon_human.csv', newline='') as csvfile:
             mas.append(l)
 
 
-'''mm = []
+mm = []
 for i in mas:
     quaternion = (i[1],i[2],i[3],i[4])  
     rot = Rotation.from_quat(quaternion)
     rot_euler = rot.as_euler('xyz', degrees=True)
     rr = list(rot_euler)
-    mm.append(rr)'''
+    mm.append(rr)
 
 x = []
 y = []
@@ -33,8 +33,9 @@ z = []
 
 fig = plt.figure()
 ax = fig.add_subplot(projection='3d')
-plt.plot([0, mm[0][0]], [0, mm[0][1]], [0, mm[0][2]], color = 'red')
-plt.plot([0,float(mas[0][6]) * 100 ], [0,float(mas[0][7])* 100], [0,float(mas[0][8])* 100]) # 6 7 8
+plt.plot([0, mm[0][0]], [0, mm[0][1]], [0, mm[0][2]], color='red')
+plt.plot([0, float(mas[0][6]) * 100], [0, float(mas[0][7]) * 100],
+         [0, float(mas[0][8]) * 100])  # 6 7 8
 plt.show()
 
 

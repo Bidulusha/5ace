@@ -1,10 +1,12 @@
 import newmath
-import to_geo as tg
+import to_geojs as tgjs
 import math
 from math import pi as PI
 import os
 import csv
 
+
+img = 'pic2/2024-10-24_04-42-28_SXC3-227_1.jpg'
 
 vert = 62.2
 gor = 48.8
@@ -98,4 +100,4 @@ for i in newpoints:
 
 ##################################GEO##################################
 
-tg.create_kml_with_image('pic2/2024-10-24_04-42-28_SXC3-227_1.jpg', newpoints,  "output.kml")
+tgjs.create_geojson_with_image(img, newpoints)

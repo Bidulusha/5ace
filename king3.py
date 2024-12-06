@@ -4,7 +4,7 @@ import math
 from math import pi as PI
 import os
 import csv
-import newhtml
+from pkinter import newhtml
 
 img = 'pic2/2024-10-24_04-42-28_SXC3-227_1.jpg'
 

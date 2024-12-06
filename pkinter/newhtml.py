@@ -1,7 +1,7 @@
 import geojson
 
 def create_html_file():
-    with open('output.geojson', 'r') as fcc_file:
+    with open('../output.geojson', 'r') as fcc_file:
         fcc_data = geojson.load(fcc_file)
 
 
@@ -41,5 +41,5 @@ def create_html_file():
     </body>
     </html>
     '''
-    with open('map.html', 'w') as f:
+    with open('../map.html', 'w') as f:
         f.write(html)

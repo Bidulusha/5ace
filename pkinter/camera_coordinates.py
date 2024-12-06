@@ -1,5 +1,6 @@
-import newmath
 #import to_geojs as tgjs
+import newmath
+from pkinter import newhtml
 import math
 from math import pi as PI
 import os
@@ -52,8 +53,8 @@ def looting(img, filecsv):
 
     ##################################Loot indexis that we need##################################
 
-    for i in euler_mas:
-        print(i)
+    #for i in euler_mas:
+        #print(i)
 
     a, b = tt[len(tt) % 2 ], tt[len(tt) % 2 + 1]
     euler_index = list((euler_mas[a][i] + euler_mas[b][i]) / 2 for i in range(3))
@@ -89,7 +90,9 @@ def looting(img, filecsv):
     #for i in newpoints:
         #print(i)
     ##################################GET new latitude and longtitude##################################
-    return newpoints
+    newhtml.create_html_file()
+    tgjs.create_geojson_with_image(img, points)
+    return points
     ##################################GEO##################################
 
     #tgjs.create_geojson_with_image(img, newpoints)

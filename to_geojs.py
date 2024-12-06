@@ -1,5 +1,5 @@
 import geojson
-
+import json
 def create_geojson_with_image(image_url, points, geojson_path="output.geojson"):
     polygon = geojson.Polygon([[
         (points[0][1], points[0][0]),  # Верхний левый угол
@@ -19,7 +19,7 @@ def create_geojson_with_image(image_url, points, geojson_path="output.geojson"):
 
     # GeoJSON-объект
     feature_collection = geojson.FeatureCollection([feature])
-
+    
     # Сохраняем GeoJSON
     with open(geojson_path, "w") as f:
         geojson.dump(feature_collection, f, indent=2)

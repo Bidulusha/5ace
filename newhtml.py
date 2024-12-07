@@ -27,10 +27,11 @@ def create_html_file(img):
             var map = L.map('map').setView(''' + str([fcc_data['features'][0]['geometry']['coordinates'][0][3][1], fcc_data['features'][0]['geometry']['coordinates'][0][3][0]]) + ''', 5); // Центр карты
     ''' + 'const geojson_data = ' + str(fcc_data) + '''
             //Добавление базового слоя карты
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-                attribution: '© OpenStreetMap contributors'
-            }).addTo(map);
+            googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
+                    maxZoom: 20,
+                    subdomains:['mt0','mt1','mt2','mt3']
+            });
+
 
             // Загрузка GeoJSON файла
                 L.geoJSON(geojson_data).addTo(map);

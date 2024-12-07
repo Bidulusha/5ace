@@ -1,13 +1,17 @@
 #import to_geojs as tgjs
 import newmath
-from pkinter import newhtml
+from . import newhtml
 import math
 from math import pi as PI
 import os
 import csv
 
-vert = 62.2
-gor = 48.8
+'''vert = 62.2
+gor = 48.8'''
+
+vert = 48.8
+gor = 62.2
+
 def looting(img, filecsv):
     def quat_to_eul_mas(m):
         mas = []

@@ -4,9 +4,9 @@ import math
 from math import pi as PI
 import os
 import csv
-from pkinter import newhtml
+import newhtml
 
-img = 'pic2/2024-10-24_04-42-28_SXC3-227_1.jpg'
+img = 'pic3/2024-10-24_09-23-56_SXC3-227_1.jpg'
 
 vert = 62.2
 gor = 48.8
@@ -19,7 +19,7 @@ def quat_to_eul_mas(m):
 
 
 ##################################GET FotoTime##################################
-dirs = os.listdir('pic2')
+dirs = os.listdir('pic3')
 
 f = -1
 for i in dirs:
@@ -27,12 +27,13 @@ for i in dirs:
     if c != -1:
         fototime = int(i[17:19])
         break
+c = fototime
 ##################################GET FotoTime##################################
 
 
 ##################################GET MAS##################################
 mas = []
-with open('pic2/logs/beacon_human.csv', newline='') as csvfile:
+with open('pic3/logs/beacon_human.csv', newline='') as csvfile:
     spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
     for row in spamreader:
         if row != [] and row[0] != 'time usec':
@@ -59,39 +60,42 @@ tt = sorted(tt)
 ##################################GET time from FotoTime##################################
 
 ##################################Loot indexis that we need##################################
-
 a, b = tt[len(tt) % 2 ], tt[len(tt) % 2 + 1]
+
 euler_index = list((euler_mas[a][i] + euler_mas[b][i]) / 2 for i in range(3))
+mv = newmath.get_movement_vetor(mas)
+
+'''euler_index[0] *= mv[0] / abs(mv[0])
+euler_index[1] *= mv[1] / abs(mv[1])'''
+zn = (mv[0] / abs(mv[0]), mv[1] / abs(mv[1]))
 ##################################Loot indexis that we need##################################
 
 ##################################GET new latitude and longtitude##################################
 
+vertd = newmath.see_obl(vert, mas[a][11] / 1000) / 2
+gord = newmath.see_obl(gor, mas[a][11] / 1000) / 2
+#############Нужно ли учитывать поворот камеры или нет?
+#c = (mas[a][9], mas[a][10])
+c = newmath.mid_center(mas)
+print(euler_index)
+#c = ((c[0] + mas[a][11] * math.tan(PI * (gor / 2 + euler_index[0]) / 180) / 111230), (c[1] + mas[a][11] * math.tan(PI * (vert / 2 + euler_index[1]) / 180)/ (111230 * math.cos(c[0]))))
 
-bigv = math.tan(PI * (euler_index[0] + vert / 2) / 180) * h / 1000
-smalv = math.tan(PI * (euler_index[0] - vert / 2) / 180) * h / 1000
+cc = ((c[1] + vertd / (111.23 * math.cos(PI * c[0] / 180)), c[1] - vertd / (111.23 * math.cos(PI * c[0] / 180))), 
+      (c[0] + gord / 111.23, c[0] - gord / (111.23)))
+print(c)
+print(cc)
 
-bigg = math.tan(PI * (euler_index[1] + gor / 2) / 180) * h / 1000
-smalg = math.tan(PI * (euler_index[1] - gor / 2) / 180) * h / 1000
-
-
-grad = 360 / 40000
-
-l = (mas[a][9] + mas[b][9]) / 2
-ll = (mas[a][10] + mas[b][10]) / 2
-
-latit = ((mas[0][9] + bigg * grad,  ll), (mas[0][9] + smalg * grad, ll))
-long = ((l, mas[0][10] + bigv * grad), (l, mas[0][10] + smalv * grad))
-
-points = ((latit[0][0], long[0][1]),(latit[0][0], long[1][1]),(latit[1][0], long[0][1]),(latit[1][0], long[1][1]))
-newpoints = newmath.rotate_axis_z(PI * (euler_index[2])/180, points)
-'''for i in points:
-    print(i)
-print()
-for i in newpoints:
-    print(i)'''
+print(vertd, gord)
 ##################################GET new latitude and longtitude##################################
 
 ##################################GEO##################################
+points = [
+    (cc[1][0], cc[0][0]), (cc[1][0], cc[0][1]),
+    (cc[1][1], cc[0][0]), (cc[1][1], cc[0][1]),
+]
+newpoints = newmath.rotate_axis_z(abs(euler_index[2]), points)
+print(points, end ='\n\n')
+print(newpoints)
 
 tgjs.create_geojson_with_image(img, points)
-newhtml.create_html_file()
+newhtml.create_html_file(img)

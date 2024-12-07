@@ -17,8 +17,8 @@
         <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
         <script type="module">
             // Инициализация карты
-            var map = L.map('map').setView([25.936759, 72.571444], 5); // Центр карты
-    const geojson_data = {"features": [{"geometry": {"coordinates": [[[72.571444, 30.318797], [66.744642, 30.318797], [66.744642, 25.936759], [72.571444, 25.936759], [72.571444, 30.318797]]], "type": "Polygon"}, "properties": {"image": "pic2/2024-10-24_04-42-28_SXC3-227_1.jpg"}, "type": "Feature"}], "type": "FeatureCollection"}
+            var map = L.map('map').setView([41.745157, 6.771938], 5); // Центр карты
+    const geojson_data = {"features": [{"geometry": {"coordinates": [[[6.771938, 46.116979], [-1.300807, 46.116979], [-1.300807, 41.745157], [6.771938, 41.745157], [6.771938, 46.116979]]], "type": "Polygon"}, "properties": {"image": "pic3/2024-10-24_09-23-56_SXC3-227_1.jpg"}, "type": "Feature"}], "type": "FeatureCollection"}
             //Добавление базового слоя карты
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
@@ -28,8 +28,8 @@
             // Загрузка GeoJSON файла
                 L.geoJSON(geojson_data).addTo(map);
             // Наложение изображения
-            var bounds = [[25.936759, 72.571444],[30.318797, 66.744642]]; 
-            L.imageOverlay('pic2/2024-10-24_04-42-28_SXC3-227_1.jpg', bounds).addTo(map);
+            var bounds = [[41.745157, 6.771938],[46.116979, -1.300807]]; 
+            L.imageOverlay(' pic3/2024-10-24_09-23-56_SXC3-227_1.jpg ', bounds).addTo(map);
         </script>
     </body>
     </html>
